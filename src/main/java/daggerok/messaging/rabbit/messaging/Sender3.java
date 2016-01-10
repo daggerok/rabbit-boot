@@ -12,7 +12,8 @@ public class Sender3 {
     @Autowired RabbitTemplate rabbitTemplate;
 
     public void send(String message) {
-        rabbitTemplate.setExchange(RabbitCfg3.exchange3);
-        rabbitTemplate.convertAndSend(message);
+        RabbitTemplate exchanged = new RabbitTemplate(rabbitTemplate.getConnectionFactory());
+        exchanged.setExchange(RabbitCfg3.exchange3);
+        exchanged.convertAndSend(message);
     }
 }

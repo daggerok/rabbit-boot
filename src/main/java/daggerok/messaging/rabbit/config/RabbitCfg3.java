@@ -17,13 +17,6 @@ public class RabbitCfg3 {
 
     public static final String exchange3 = "exchange3";
 
-//    @Bean // see daggerok.messaging.rabbit.messaging.Sender3.send
-//    public RabbitTemplate rabbitTemplate3(ConnectionFactory connectionFactory) {
-//        RabbitTemplate rabbitTemplate3 = new RabbitTemplate(connectionFactory);
-//        rabbitTemplate3.setExchange(exchange3);
-//        return rabbitTemplate3;
-//    }
-
     @Bean
     public Queue queue31() {
         return new Queue(queue31);
