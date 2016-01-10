@@ -16,5 +16,13 @@ $ rabbitmq_server-3.6.0/sbin/rabbitmq-server
 $ git clone https://github.com/daggerok/rabbit-boot
 $ gradle run
 ```
-go to http://localhost:8080 or import project and Run -> All Tests
-send message, verify logs
+
+1. go to http://localhost:8080 
+2. send message
+3. verify logs
+
+or
+
+1. import project into idea
+2. right click -> Run -> All Tests
+3. verify logs
