@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boot Rabbit</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap.css">
+</head>
+<body>
+<main class="container">
+    <h3>hello and welcome!</h3>
+    <div class=container">
+        <p>send your message</p>
+        <form id="send-message-form" action="/message/send" method="post">
+            <input autofocus type="text" name="message" autocomplete="off" class="lg"/>
+            <input class="btn btn-sm btn-default btn-shadow" type="submit" value="send message"/>
+        </form>
+    </div>
+</main>
+</body>
+</html>
