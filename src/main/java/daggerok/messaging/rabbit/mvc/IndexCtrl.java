@@ -1,4 +1,4 @@
-package daggerok.messaging.rabbit.ctrl;
+package daggerok.messaging.rabbit.mvc;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

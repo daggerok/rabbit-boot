@@ -1,4 +1,4 @@
-package daggerok.messaging.rabbit.config;
+package daggerok.messaging.rabbit.messaging.publishsubscribe;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.concurrent.CountDownLatch;
 
 @Configuration
-public class RabbitCfg3 {
+public class AllWorkersProcessAllQueueMessages {
     public static final String queue31 = "queue31";
 
     public static final String queue32 = "queue32";

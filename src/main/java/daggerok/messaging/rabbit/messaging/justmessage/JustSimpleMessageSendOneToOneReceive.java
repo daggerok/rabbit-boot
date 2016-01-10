@@ -1,4 +1,4 @@
-package daggerok.messaging.rabbit.config;
+package daggerok.messaging.rabbit.messaging.justmessage;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.concurrent.CountDownLatch;
 
 @Configuration
-public class RabbitCfg1 {
+public class JustSimpleMessageSendOneToOneReceive {
     public static final String queue1 = "queue1";
 
     @Bean

@@ -1,6 +1,5 @@
-package daggerok.messaging.rabbit.messaging;
+package daggerok.messaging.rabbit.messaging.justmessage;
 
-import daggerok.messaging.rabbit.config.RabbitCfg1;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +14,7 @@ public class Receiver1 {
     @Resource(name = "countDownLatch1")
     CountDownLatch countDownLatch1;
 
-    @RabbitListener(queues = RabbitCfg1.queue1)
+    @RabbitListener(queues = JustSimpleMessageSendOneToOneReceive.queue1)
     public void process1(String message) {
         logger.info("███ process1: " + message);
         countDownLatch1.countDown();

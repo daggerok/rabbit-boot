@@ -1,4 +1,4 @@
-package daggerok.messaging.rabbit.ctrl;
+package daggerok.messaging.rabbit.mvc;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.web.ErrorController;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("${server.error.path:${error.path:/error}}")
-public class NoErrorCtrl implements ErrorController {
+public class ErrorIndexRedirectHandler implements ErrorController {
     @Value("${server.error.path:${error.path:/error}}")
     String path;
 

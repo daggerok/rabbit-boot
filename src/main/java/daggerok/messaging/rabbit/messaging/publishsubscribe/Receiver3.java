@@ -1,8 +1,6 @@
-package daggerok.messaging.rabbit.messaging;
+package daggerok.messaging.rabbit.messaging.publishsubscribe;
 
-import daggerok.messaging.rabbit.config.RabbitCfg3;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -18,21 +16,23 @@ public class Receiver3 {
     @Resource(name = "countDownLatch3")
     CountDownLatch countDownLatch3;
 
-    @RabbitListener(queues = RabbitCfg3.queue31)
+    @RabbitListener(queues = AllWorkersProcessAllQueueMessages.queue31)
     public void process31(String data) {
         logger.info(String.format("███ process31: %s",
-                Stream.of(data.toLowerCase())
-                        .map(i -> i.concat("_"))
-                        .collect(Collectors.joining("_"))));
+                data.toLowerCase().chars()
+                        .mapToObj(i -> (char) i)
+                        .map(ch -> String.format("_%c_", ch))
+                        .collect(Collectors.joining(","))));
         countDownLatch3.countDown();
     }
 
-    @RabbitListener(queues = RabbitCfg3.queue32)
+    @RabbitListener(queues = AllWorkersProcessAllQueueMessages.queue32)
     public void process32(String data) {
         logger.info(String.format("███ process32: %s",
-                Stream.of(data.toLowerCase())
-                        .map(i -> i.concat("__"))
-                        .collect(Collectors.joining("__"))));
+                data.toLowerCase().chars()
+                        .mapToObj(i -> (char) i)
+                        .map(ch -> String.format("__%c__", ch))
+                        .collect(Collectors.joining(","))));
         countDownLatch3.countDown();
     }
 }
