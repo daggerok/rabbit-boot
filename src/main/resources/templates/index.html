@@ -3,18 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Boot Rabbit</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap.css">
+    {{#request}}
+    {{#contextPath}}
+    <link rel="stylesheet" href="{{.}}/webjars/bootstrap/3.3.6/css/bootstrap.css">
+    {{/contextPath}}
+    {{/request}}
 </head>
 <body>
 <main class="container">
     <h3>hello and welcome!</h3>
     <div class=container">
         <p>send your message</p>
-        <form id="send-message-form" action="/message/send" method="post">
+        {{#request}}
+            {{#contextPath}}
+        <form id="send-message-form" action="{{.}}/message/send" method="post">
             <input autofocus type="text" name="message" autocomplete="off" class="lg"/>
             <input class="btn btn-sm btn-default btn-shadow" type="submit" value="send message"/>
         </form>
+            {{/contextPath}}
+        {{/request}}
     </div>
+<footer class="footer">2016 &copy; daggerok</footer>
 </main>
 </body>
 </html>

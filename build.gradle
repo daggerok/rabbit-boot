@@ -29,4 +29,10 @@ dependencies {
 	testCompile "org.springframework.boot:spring-boot-starter-test"
 }
 
+// gradle bootRun -Dserver.context-path=/app
+bootRun { systemProperties = System.properties }
+
+// gradle run -Dserver.context-path=/app
+run { systemProperties = System.properties }
+
 task wrapper(type: Wrapper) { gradleVersion = "2.10" }
