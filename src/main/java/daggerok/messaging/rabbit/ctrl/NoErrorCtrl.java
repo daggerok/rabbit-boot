@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("${server.error.path:${error.path:/error}}")
-public class ErrorCtrl implements ErrorController {
+public class NoErrorCtrl implements ErrorController {
     @Value("${server.error.path:${error.path:/error}}")
     String path;
 

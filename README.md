@@ -6,8 +6,9 @@ boot rabbit messaging!
 **tags**
 
 - rabbit
-- messaging
-- spring boot, webjars
+- spring boot
+- spring messaging
+- spring nvc, mustache, webjars
 - gradle
 
 ```shell
