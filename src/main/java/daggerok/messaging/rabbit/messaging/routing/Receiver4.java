@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Component
 public class Receiver4 {
