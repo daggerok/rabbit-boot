@@ -22,8 +22,7 @@ public class MessagingService {
 
     @Autowired SimpleSender simpleSender;
 
-    @Autowired
-    WorkerQueueSender workerQueueSender;
+    @Autowired WorkerQueueSender workerQueueSender;
 
     @Autowired Publisher publisher;
 
