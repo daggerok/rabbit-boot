@@ -8,7 +8,7 @@ import java.util.concurrent.CountDownLatch;
 
 @Configuration
 public class SimpleSendReceiveConfig {
-    public static final String simpleQueue = "simpleQueue";
+    private static final String simpleQueue = "simpleQueue";
 
     @Bean Queue simpleQueue() {
         return new Queue(simpleQueue, false);
