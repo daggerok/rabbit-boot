@@ -27,7 +27,7 @@ public class MessagingRabbitApplicationTests {
     @Autowired ApplicationContext applicationContext;
 
     @Test
-    public void contextLoads() {
+    public void testContext() {
         assertNotNull("null applicationContext", applicationContext);
 
         Arrays.asList(
@@ -86,7 +86,7 @@ public class MessagingRabbitApplicationTests {
     }
 
     @Test
-    public void testQueueListenAllWorkersButOnlyOneWorkerPerMessage() throws Exception {
+    public void testWorkersQueue() throws Exception {
         workerQueueSender.send("one");
         workerQueueSender.send("two");
         countDownLatch2.await(5, TimeUnit.SECONDS);
@@ -111,7 +111,7 @@ public class MessagingRabbitApplicationTests {
     }
 
     @Test
-    public void testRoutingDirectExchange() throws Exception {
+    public void testRouting() throws Exception {
         routingSender.send("log very bad error message!");
         routingSender.send("log some nice info msg");
         routingSender.send("some not processed message");
@@ -123,7 +123,7 @@ public class MessagingRabbitApplicationTests {
     }
 
     @Test
-    public void testTopicsExchange() throws Exception {
+    public void testTopics() throws Exception {
         Stream.of("rgb means red blue and green".split(" ")).forEach(topicSender::send);
         Stream.of("black and white in all of us".split(" ")).forEach(topicSender::send);
         Stream.of("the beatles - yellow submarine".split(" ")).forEach(topicSender::send);
