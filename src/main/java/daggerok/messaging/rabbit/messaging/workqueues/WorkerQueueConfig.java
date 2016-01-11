@@ -7,16 +7,14 @@ import org.springframework.context.annotation.Configuration;
 import java.util.concurrent.CountDownLatch;
 
 @Configuration
-public class QueueListenAllWorkersButOnlyOneWorkerPerMessage {
-    public static final String queue2 = "queue2";
+public class WorkerQueueConfig {
+    public static final String workerQueue = "workerQueue";
 
-    @Bean
-    public Queue queue2() {
-        return new Queue(queue2);
+    @Bean public Queue workerQueue() {
+        return new Queue(workerQueue);
     }
 
-    @Bean
-    public CountDownLatch countDownLatch2() {
+    @Bean public CountDownLatch workerLatch() {
         return new CountDownLatch(2);
     }
 }

@@ -5,11 +5,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RemoteProcedureCalls {
-    public static final String queue6 = "queue6";
+public class RemoteProcedureCallsConfig {
+    public static final String prcQueue = "rpcQueue";
 
     @Bean
-    public Queue queue6() {
-        return new Queue(queue6);
+    public Queue rpcQueue() {
+        return new Queue(prcQueue);
     }
 }

@@ -1,37 +1,37 @@
 package daggerok.messaging.rabbit.messaging.routing;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-@Component
-public class Receiver4 {
-    Logger logger = Logger.getLogger(Receiver4.class.getName());
+@Service
+public class RoutingReceiver {
+    private static final Logger logger = Logger.getLogger(RoutingReceiver.class.getName());
 
-    @Resource(name = "countDownLatch4")
-    CountDownLatch countDownLatch4;
+    @Resource(name = "routingLatch")
+    CountDownLatch routingLatch;
 
-    @RabbitListener(queues = RoutingDirectExchange.info)
-    public void process41(String data) {
-        logger.info(String.format("███ %s: %s", RoutingDirectExchange.info,
+    @RabbitListener(queues = RoutingConfig.info)
+    public void processInfo(String data) {
+        logger.info(String.format("███ %s: %s", RoutingConfig.info,
                 data.toLowerCase().chars()
                         .mapToObj(i -> (char) i)
                         .map(ch -> String.format("%c", ch))
                         .collect(Collectors.joining(""))));
-        countDownLatch4.countDown();
+        routingLatch.countDown();
     }
 
-    @RabbitListener(queues = RoutingDirectExchange.error)
-    public void process42(String data) {
-        logger.info(String.format("███ %s: %s", RoutingDirectExchange.error,
+    @RabbitListener(queues = RoutingConfig.error)
+    public void processError(String data) {
+        logger.info(String.format("███ %s: %s", RoutingConfig.error,
                 data.toLowerCase().chars()
                         .mapToObj(i -> (char) i)
                         .map(ch -> String.format(".%c.", ch))
                         .collect(Collectors.joining(""))));
-        countDownLatch4.countDown();
+        routingLatch.countDown();
     }
 }

@@ -3,10 +3,10 @@ package daggerok.messaging.rabbit.messaging.routing;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class Sender4 {
+@Service
+public class RoutingSender {
     @Autowired ConnectionFactory connectionFactory;
 
     public void send(String message) {
@@ -24,16 +24,16 @@ public class Sender4 {
     }
 
     public void info(String message) {
-        template(RoutingDirectExchange.info, message);
+        template(RoutingConfig.info, message);
     }
 
     public void error(String message) {
-        template(RoutingDirectExchange.error, message);
+        template(RoutingConfig.error, message);
     }
 
     private void template(String routing, String message) {
         RabbitTemplate exchanged = new RabbitTemplate(connectionFactory);
-        exchanged.setExchange(RoutingDirectExchange.exchange4);
+        exchanged.setExchange(RoutingConfig.routingExchange);
         exchanged.convertAndSend(routing, message);
     }
 }

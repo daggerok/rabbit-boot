@@ -9,19 +9,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CommonCfg {
-    @Bean
-    public ConnectionFactory connectionFactory() {
+public class CommonConfig {
+    @Bean public ConnectionFactory connectionFactory() {
         return new CachingConnectionFactory("localhost");
     }
 
-    @Bean
-    public AmqpAdmin amqpAdmin(ConnectionFactory connectionFactory) {
+    @Bean public AmqpAdmin amqpAdmin(ConnectionFactory connectionFactory) {
         return new RabbitAdmin(connectionFactory);
     }
 
-    @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+    @Bean public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         return new RabbitTemplate(connectionFactory);
     }
 }

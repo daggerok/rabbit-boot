@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Sender2 {
+public class WorkerQueueSender {
     @Autowired RabbitTemplate rabbitTemplate;
 
     public void send(String message) {
-        rabbitTemplate.convertAndSend(QueueListenAllWorkersButOnlyOneWorkerPerMessage.queue2, message);
+        rabbitTemplate.convertAndSend(WorkerQueueConfig.workerQueue, message);
     }
 }

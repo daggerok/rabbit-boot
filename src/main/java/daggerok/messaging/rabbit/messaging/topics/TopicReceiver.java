@@ -1,37 +1,37 @@
 package daggerok.messaging.rabbit.messaging.topics;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-@Component
-public class Receiver5 {
-    Logger logger = Logger.getLogger(Receiver5.class.getName());
+@Service
+public class TopicReceiver {
+    private static final Logger logger = Logger.getLogger(TopicReceiver.class.getName());
 
-    @Resource(name = "countDownLatch5")
-    CountDownLatch countDownLatch5;
+    @Resource(name = "topicsLatch")
+    CountDownLatch topicsLatch;
 
-    @RabbitListener(queues = TopicsExchange.noColor)
-    public void process51(String data) {
-        logger.info(String.format("███ %s: %s", TopicsExchange.noColor,
+    @RabbitListener(queues = TopicsExchangeConfig.noColor)
+    public void processNoColor(String data) {
+        logger.info(String.format("███ %s: %s", TopicsExchangeConfig.noColor,
                 data.toLowerCase().chars()
                         .mapToObj(i -> (char) i)
                         .map(ch -> String.format("%c", ch))
                         .collect(Collectors.joining("█"))));
-        countDownLatch5.countDown();
+        topicsLatch.countDown();
     }
 
-    @RabbitListener(queues = TopicsExchange.color)
-    public void process52(String data) {
-        logger.info(String.format("### %s: %s", TopicsExchange.color,
+    @RabbitListener(queues = TopicsExchangeConfig.color)
+    public void processColor(String data) {
+        logger.info(String.format("### %s: %s", TopicsExchangeConfig.color,
                 data.toLowerCase().chars()
                         .mapToObj(i -> (char) i)
                         .map(ch -> String.format("%c", ch))
                         .collect(Collectors.joining("#"))));
-        countDownLatch5.countDown();
+        topicsLatch.countDown();
     }
 }

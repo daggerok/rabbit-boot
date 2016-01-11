@@ -5,11 +5,20 @@ boot rabbit messaging!
 
 **tags**
 
-- rabbit
-- spring boot
-- spring messaging
-- spring nvc, mustache, webjars
-- gradle
+- rabbit:
+  - simple send, receive
+  - workers (work queues)
+  - publish, subscriber
+  - routing (direct exchange)
+  - topics (topic exchange)
+  - rpc (remote procedure calls)
+- spring:
+  - spring messaging
+  - spring boot
+  - mvc
+  - error handling
+  - mustache template engine
+- gradle + webjars
 
 ```shell
 $ wget -qO-  http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.0/rabbitmq-server-generic-unix-3.6.0.tar.xz | tar -xvf-
@@ -26,4 +35,3 @@ or
 
 1. import project into idea
 2. right click -> Run -> All Tests
-3. verify logs

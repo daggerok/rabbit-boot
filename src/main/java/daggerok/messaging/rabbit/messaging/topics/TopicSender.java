@@ -3,12 +3,12 @@ package daggerok.messaging.rabbit.messaging.topics;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 
-@Component
-public class Sender5 {
+@Service
+public class TopicSender {
     @Autowired ConnectionFactory connectionFactory;
 
     public void send(String message) {
@@ -26,16 +26,16 @@ public class Sender5 {
     }
 
     public void noColor(String message) {
-        template(TopicsExchange.noColor, message);
+        template(TopicsExchangeConfig.noColor, message);
     }
 
     public void color(String message) {
-        template(TopicsExchange.color, message);
+        template(TopicsExchangeConfig.color, message);
     }
 
     private void template(String routing, String message) {
         RabbitTemplate exchanged = new RabbitTemplate(connectionFactory);
-        exchanged.setExchange(TopicsExchange.exchange5);
+        exchanged.setExchange(TopicsExchangeConfig.topicsExchange);
         exchanged.convertAndSend(routing, message);
     }
 }
