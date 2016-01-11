@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("${server.error.path:${error.path:/error}}")
@@ -21,7 +20,7 @@ public class ErrorIndexRedirectHandler implements ErrorController {
     }
 
     @RequestMapping(produces = "text/html")
-    public String errorHtml(Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String errorHtml(Model model, HttpServletRequest request) {
         model.addAttribute("request", request);
         return "index";
     }
