@@ -9,71 +9,38 @@ import daggerok.messaging.rabbit.messaging.workqueues.WorkerQueueSender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
-import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = MessagingRabbitApplication.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class MessagingRabbitApplicationTests {
+
     @Autowired ApplicationContext applicationContext;
 
-    @Test
-    public void testContext() {
-        assertNotNull("null applicationContext", applicationContext);
-
-        Arrays.asList(
-                "commonConfig", "connectionFactory", "amqpAdmin", "rabbitTemplate",
-
-                "simpleSendReceiveConfig", "workerQueueConfig", "publisherSubscriberConfig", "routingConfig",
-                "topicsExchangeConfig", "remoteProcedureCallsConfig",
-
-                "simpleQueue", "workerQueue", "dashQueue", "underscoreQueue", "info", "error", "noColorQueue",
-                "colorQueue", "rpcQueue",
-
-                "simpleLatch", "workerLatch", "subscriberLatch", "routingLatch", "topicsLatch",
-
-                "publishExchange", "routingExchange", "topicsExchange", "dashToToPublishExchange",
-                "underscoreToPublishExchange",
-
-                "infoWithInfo", "infoWithError", "errorWithError", "noColorWithNoColor", "colorWithNoColor",
-                "colorWithColor",
-
-                "simpleReceiver", "workerQueueReceiver", "subscriber", "routingReceiver", "topicReceiver",
-                "rpcProcessor",
-
-                "simpleSender", "workerQueueSender", "publisher", "routingSender", "topicSender", "rpcSenderReceiver",
-
-                "indexCtrl", "errorIndexRedirectHandler", "messagingService",
-
-                "messagingRabbitApplication"
-        ).stream().forEach(beanName ->
-                assertTrue(String.format("%s bean wasn't found", beanName), applicationContext.containsBean(beanName)));
-    }
-
     @Autowired SimpleSender simpleSender;
-    @Resource(name = "simpleLatch") CountDownLatch countDownLatch1;
+    @Autowired @Qualifier("simpleLatch") CountDownLatch countDownLatch1;
 
-    @Autowired
-    WorkerQueueSender workerQueueSender;
-    @Resource(name = "workerLatch") CountDownLatch countDownLatch2;
+    @Autowired WorkerQueueSender workerQueueSender;
+    @Autowired @Qualifier("workerLatch") CountDownLatch countDownLatch2;
 
     @Autowired Publisher publisher;
-    @Resource(name = "subscriberLatch") CountDownLatch countDownLatch3;
+    @Autowired @Qualifier("subscriberLatch") CountDownLatch countDownLatch3;
 
     @Autowired RoutingSender routingSender;
-    @Resource(name = "routingLatch") CountDownLatch countDownLatch4;
+    @Autowired @Qualifier("routingLatch") CountDownLatch countDownLatch4;
 
     @Autowired TopicSender topicSender;
-    @Resource(name = "topicsLatch") CountDownLatch countDownLatch5;
+    @Autowired @Qualifier("topicsLatch") CountDownLatch countDownLatch5;
 
     @Autowired RpcSenderReceiver rpcSenderReceiver;
 
