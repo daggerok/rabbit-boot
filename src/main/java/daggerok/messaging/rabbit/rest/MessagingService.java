@@ -6,35 +6,29 @@ import daggerok.messaging.rabbit.messaging.routing.RoutingSender;
 import daggerok.messaging.rabbit.messaging.simple.SimpleSender;
 import daggerok.messaging.rabbit.messaging.topics.TopicSender;
 import daggerok.messaging.rabbit.messaging.workqueues.WorkerQueueSender;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.logging.Logger;
-
-@Controller
-@RequestMapping("/message")
+@Slf4j
+@RestController
+@RequiredArgsConstructor
 public class MessagingService {
-    private static final Logger logger = Logger.getLogger(MessagingService.class.getName());
 
-    @Autowired SimpleSender simpleSender;
+    final Publisher publisher;
+    final TopicSender topicSender;
+    final SimpleSender simpleSender;
+    final RoutingSender routingSender;
+    final WorkerQueueSender workerQueueSender;
+    final RpcSenderReceiver rpcSenderReceiver;
 
-    @Autowired WorkerQueueSender workerQueueSender;
+    @RequestMapping("/message/send")
+    public ResponseEntity<String> send(final String message) {
 
-    @Autowired Publisher publisher;
-
-    @Autowired RoutingSender routingSender;
-
-    @Autowired TopicSender topicSender;
-
-    @Autowired RpcSenderReceiver rpcSenderReceiver;
-
-    @RequestMapping("/send")
-    public void send(String message, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        logger.info("=== processing new message ===");
+        log.info("processing new message: {}", message);
 
         if (null != message && !"".equals(message)) {
             simpleSender.send(message);
@@ -45,6 +39,6 @@ public class MessagingService {
             rpcSenderReceiver.send(message);
         }
 
-        response.sendRedirect(request.getContextPath().concat("/"));
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class IndexCtrl {
     @RequestMapping("/")
-    public String sendMessage(Model model, HttpServletRequest request) {
+    public String sendMessage(final Model model, final HttpServletRequest request) {
         model.addAttribute("request", request);
         return "index";
     }

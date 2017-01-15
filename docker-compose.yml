@@ -1,0 +1,31 @@
+#
+# my-rabbitmq:
+#   image: rabbitmq:3.6.6
+#   container_name: my-rabbitmq
+#   hostname: my-rabbitmq
+#   ports:
+#     - '5672:5672'
+#
+# rabbit admin: http://localhost
+my-rabbit-admin:
+  image: rabbitmq:3.6.6-management
+  container_name: my-rabbitmq-admin
+  hostname: my-rabbitmq-admin
+  env_file:
+   - .docker.secrets
+  # environment:
+  #   RABBITMQ_DEFAULT_VHOST: my-rabbitmq-admin
+  ports:
+  - '5672:5672'
+  - '15672:15672'
+  - '25672:25672'
+  volumes_from:
+  - my-rabbitmq-data
+my-rabbitmq-data:
+  image: rabbitmq:3.6.6
+  tty: true
+  command: chown -v -R 999:999 /var/lib/rabbitmq
+  volumes:
+  - './var/lib/rabbitmq:/var/lib/rabbitmq'
+  - './etc/rabbitmq:/etc/rabbitmq'
+  stdin_open: true

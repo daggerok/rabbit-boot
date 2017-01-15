@@ -1,4 +1,4 @@
-package daggerok.messaging.rabbit.config;
+package daggerok.messaging.rabbit.config.rabbit;
 
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -9,16 +9,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CommonConfig {
-    @Bean public ConnectionFactory connectionFactory() {
+public class RabbitConfig {
+
+    @Bean
+    public ConnectionFactory connectionFactory() {
         return new CachingConnectionFactory("localhost");
     }
 
-    @Bean public AmqpAdmin amqpAdmin(ConnectionFactory connectionFactory) {
+    @Bean
+    public AmqpAdmin amqpAdmin(ConnectionFactory connectionFactory) {
         return new RabbitAdmin(connectionFactory);
     }
 
-    @Bean public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         return new RabbitTemplate(connectionFactory);
     }
 }

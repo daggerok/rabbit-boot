@@ -20,6 +20,15 @@ boot rabbit messaging!
   - mustache template engine
 - gradle + webjars
 
+latest:
+```bash
+rm -rf etc/ var/
+docker-compose up
+gradle run
+```
+
+old:
+
 ```shell
 $ wget -qO-  http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.0/rabbitmq-server-generic-unix-3.6.0.tar.xz | tar -xvf-
 $ rabbitmq_server-3.6.0/sbin/rabbitmq-server

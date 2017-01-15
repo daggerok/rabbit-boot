@@ -3,27 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Boot Rabbit</title>
-    {{#request}}
-        {{#contextPath}}
-    <link rel="stylesheet" href="{{.}}/webjars/bootstrap/3.3.6/css/bootstrap.css">
-        {{/contextPath}}
-    {{/request}}
+    <meta name="base" content="{{ctx}}">
+    <link rel="stylesheet" href="{{ctx}}/webjars/bootstrap/css/bootstrap.css">
 </head>
 <body>
 <main class="container">
     <h3>hello and welcome!</h3>
     <div class=container">
         <p>send your message</p>
-        {{#request}}
-            {{#contextPath}}
-        <form id="send-message-form" action="{{.}}/message/send" method="post">
-            <input autofocus type="text" name="message" autocomplete="off" class="lg"/>
-            <input class="btn btn-sm btn-default btn-shadow" type="submit" value="send message"/>
+        <form
+            id="send-message-form"
+            action="/message/send"
+            method="post">
+
+            <input
+                autofocus
+                type="text"
+                name="message"
+                autocomplete="off"
+                class="lg"/>
+
+            <input
+                class="btn btn-sm btn-default btn-shadow"
+                type="submit"
+                value="send message"/>
         </form>
-            {{/contextPath}}
-        {{/request}}
     </div>
 <footer class="footer">2016 &copy; daggerok</footer>
 </main>
+<script src="{{ctx}}/webjars/jquery/jquery.js"></script>
+<script src="{{ctx}}/webjars/bootstrap/js/bootstrap.js"></script>
+<script src="{{ctx}}/app.js"></script>
 </body>
 </html>
