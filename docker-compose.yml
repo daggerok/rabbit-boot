@@ -1,26 +1,15 @@
-#
-# my-rabbitmq:
-#   image: rabbitmq:3.6.6
-#   container_name: my-rabbitmq
-#   hostname: my-rabbitmq
-#   ports:
-#     - '5672:5672'
-#
-# rabbit admin: http://localhost/
-my-rabbit-admin:
-  image: rabbitmq:3.6.6-management
-  container_name: my-rabbitmq-admin
-  hostname: my-rabbitmq-admin
-#  env_file:
-#   - .docker.secrets
-  environment:
-    RABBITMQ_DEFAULT_USER: guest
-    RABBITMQ_DEFAULT_PASS: guest
-    RABBITMQ_ERLANG_COOKIE: test
+my-rabbitmq:
+  image: rabbitmq:3.6.6
+  container_name: my-rabbitmq
+  hostname: my-rabbitmq
+#  environment:
+#    RABBITMQ_DEFAULT_USER: guest
+#    RABBITMQ_DEFAULT_PASS: guest
+#    RABBITMQ_ERLANG_COOKIE: test
+  env_file:
+  - './.docker.secrets'
   ports:
   - '5672:5672'
-  - '80:15672'
-  - '25672:25672'
   volumes_from:
   - my-rabbitmq-data
 my-rabbitmq-data:
@@ -31,3 +20,16 @@ my-rabbitmq-data:
   - './var/lib/rabbitmq:/var/lib/rabbitmq'
   - './etc/rabbitmq:/etc/rabbitmq'
   stdin_open: true
+
+# rabbit admin: http://localhost/
+my-rabbitmq-admin:
+  image: rabbitmq:3.6.6-management
+  container_name: my-rabbitmq-admin
+  hostname: my-rabbitmq-admin
+  env_file:
+   - '.docker.secrets'
+  ports:
+  - '80:15672'
+  - '25672:25672'
+  links:
+  - 'my-rabbitmq:rabbit'

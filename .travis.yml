@@ -1,21 +1,10 @@
 language: java
 jdk: oraclejdk8
-#services: rabbitmq
-services: docker
+services: rabbitmq
 env:
   SPRING_PROFILES_ACTIVE: default
-  RABBITMQ_DEFAULT_USER: guest
-  RABBITMQ_DEFAULT_PASS: guest
-  RABBITMQ_ERLANG_COOKIE: test
-before_install:
-- rm -rf var/ etc/
-- docker-compose down
-- docker-compose rm -f
-- docker-compose up -d
-script: bash gradlew build -i
-after_script:
-- docker-compose kill
-- bash gradlew dependencyUpdates -Drevision=release
+script: bash gradlew build
+after_script: bash gradlew dependencyUpdates -Drevision=release
 cache.directories:
 - /var/lib/docker
 - $HOME/.gradle
