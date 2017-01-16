@@ -19,7 +19,7 @@ repositories { jcenter() }
 
 dependencies {
   compile 'org.springframework.boot:spring-boot-starter-amqp',
-      'org.springframework.amqp:spring-rabbit:1.5.3.RELEASE',
+      'org.springframework.amqp:spring-rabbit',
       'org.springframework.boot:spring-boot-starter-mustache',
       'org.springframework.boot:spring-boot-devtools',
       'org.webjars:webjars-locator:0.3+',

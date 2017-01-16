@@ -1,13 +1,13 @@
 language: java
 jdk: oraclejdk8
-#services: rabbitmq
-services: docker
-env: SPRING_PROFILES_ACTIVE=default
-before_install: docker-compose up -d
-script: ./gradlew build
+services: rabbitmq
+#services: docker
+#env: SPRING_PROFILES_ACTIVE=default
+#before_install: docker-compose up -d
+script: bash gradlew build
 after_script:
-- docker-compose kill
-- gradle dependencyUpdates -Drevision=release
+#- docker-compose kill
+- bash gradlew dependencyUpdates -Drevision=release
 cache.directories:
 - /var/lib/docker
 - $HOME/.gradle
