@@ -6,18 +6,20 @@
 #   ports:
 #     - '5672:5672'
 #
-# rabbit admin: http://localhost
+# rabbit admin: http://localhost/
 my-rabbit-admin:
   image: rabbitmq:3.6.6-management
   container_name: my-rabbitmq-admin
   hostname: my-rabbitmq-admin
-  env_file:
-   - .docker.secrets
-  # environment:
-  #   RABBITMQ_DEFAULT_VHOST: my-rabbitmq-admin
+#  env_file:
+#   - .docker.secrets
+  environment:
+    RABBITMQ_DEFAULT_USER: guest
+    RABBITMQ_DEFAULT_PASS: guest
+    RABBITMQ_ERLANG_COOKIE: test
   ports:
   - '5672:5672'
-  - '15672:15672'
+  - '80:15672'
   - '25672:25672'
   volumes_from:
   - my-rabbitmq-data
