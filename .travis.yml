@@ -3,7 +3,9 @@ jdk: oraclejdk8
 services: rabbitmq
 env:
   SPRING_PROFILES_ACTIVE: default
-script: bash gradlew build
+script:
+- bash gradlew build
+- bash gradle runDefault
 after_script: bash gradlew dependencyUpdates -Drevision=release
 cache.directories:
 - /var/lib/docker
